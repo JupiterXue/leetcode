@@ -15,31 +15,18 @@ func swapPairs(head *ListNode) *ListNode {
 	h1.Next = swapPairs(h2.Next)
 	h2.Next = h1
 	return h2
-
-	//if head == nil {
-	//	return head
-	//}
-	//
-	//if head.Next == nil {
-	//	return head
-	//}
-	//
-	//nodeList := make([]*ListNode, 0)
-	//for head != nil && head.Next != nil {
-	//	nodeList = append(nodeList, head)
-	//	head = head.Next.Next
-	//}
-	//
-	////nextNode := new(ListNode)
-	//nextNode := (*ListNode)(nil)
-	//for i := len(nodeList) -1; i >= 0; i-- {
-	//	h1, h2 := nodeList[i], nodeList[i].Next
-	//	h1.Next = nextNode
-	//	h2.Next = h1
-	//	nextNode = h2
-	//}
-	//return nextNode
 }
+
+//func swapPairs(head *ListNode) *ListNode {
+//	if head == nil || head.Next == nil {
+//		return head
+//	}
+//
+//	h1, h2 := head, head.Next
+//	h1.Next = swapPairs(h2.Next)
+//	h2.Next = h1
+//	return h2
+//}
 
 type ListNode struct {
 	Val int

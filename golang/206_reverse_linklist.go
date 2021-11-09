@@ -28,11 +28,28 @@ package main
 //	return newHead.Next
 //}
 
+//func reverseList(head *ListNode) *ListNode {
+//	if head == nil {
+//		return nil
+//	}
+//
+//	var cur *ListNode
+//	pre := head
+//	for pre != nil {
+//		tmp := pre.Next
+//		pre.Next = cur
+//		cur = pre
+//		pre = tmp
+//	}
+//	return cur
+//}
+
 func reverseList(head *ListNode) *ListNode {
 	if head == nil {
 		return nil
 	}
 
+	// 双指针
 	var cur *ListNode
 	pre := head
 	for pre != nil {
