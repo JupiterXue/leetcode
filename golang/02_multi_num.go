@@ -89,3 +89,69 @@ package main
 //	PrintlistNode(l1, "l1")
 //	PrintlistNode(l2, "l2")
 //}
+
+
+func LinkListToArray(l *ListNode) []int {
+	point := l
+	res := []int{}
+	for point != nil {
+		//res = append([]int{point.Val}, res...) // 头插
+		res = append(res, point.Val) // 尾插
+		point = point.Next
+	}
+	return res
+}
+
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	listL1 := LinkListToArray(l1)
+	listL2 := LinkListToArray(l2)
+	newListNode := &ListNode{0, nil}
+	point := newListNode
+	more := 0
+	if len(listL1) > len(listL2) {
+		for i := 0; i < len(listL1); i++ {
+			tmp := &ListNode{0, nil}
+			sum := 0
+			if i > len(listL2) - 1 {
+				sum = listL1[i] + more
+			} else {
+				sum = listL1[i] + listL2[i] + more
+			}
+			if more > 0 {
+				more--
+			}
+			if sum > 9 {
+				sum %= 10
+				more++
+			}
+			tmp.Val = sum
+			point.Next = tmp
+			point = point.Next
+		}
+	} else {
+		for i := 0; i < len(listL2); i++ {
+			tmp := &ListNode{0, nil}
+			sum := 0
+			if i > len(listL1) - 1 {
+				sum = listL2[i] + more
+			} else {
+				sum = listL1[i] + listL2[i] + more
+			}
+			if more > 0 {
+				more--
+			}
+			if sum > 9 {
+				sum %= 10
+				more++
+			}
+			tmp.Val = sum
+			point.Next = tmp
+			point = point.Next
+		}
+	}
+	if more > 0 {
+		tmp := &ListNode{1, nil}
+		point.Next = tmp
+	}
+	return newListNode.Next
+}

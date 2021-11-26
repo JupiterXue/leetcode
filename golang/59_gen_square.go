@@ -2,36 +2,61 @@ package main
 
 import "fmt"
 
+//func generateMatrix(n int) [][]int {
+//	nums := []int{}
+//	for i := 1; i < n * n; i++ {
+//		nums = append(nums, i)
+//	}
+//	matrix := make([][]int, n)
+//	tmp := []int{}
+//	for i := 0; i < n; i++ {
+//		tmp = append(tmp, 0)
+//	}
+//	for i := 0; i < n; i++ {
+//		matrix[i] = tmp
+//	}
+//	col := n
+//	row := 0
+//	for col > 0 {
+//		n = nums[0]
+//		if len(nums) == 0 {
+//			break
+//		}
+//		nums = nums[1:]
+//		for c := 0; c < col; c++ {
+//			matrix[row][c] = n
+//			col = c
+//		}
+//		for r := 0; r < row; r++ {
+//			matrix[r][col] = n
+//			row = r
+//		}
+//	}
+//	return matrix
+//}
+
+type pair struct {
+	x, y int
+}
+
+var dirs = []pair {{0, 1}, {1, 0}, {0, -1}, {-1, 0}} // 右下左上
+
 func generateMatrix(n int) [][]int {
-	nums := []int{}
-	for i := 1; i < n * n; i++ {
-		nums = append(nums, i)
+	matrix := make([][]int, n)
+	for i := range matrix {
+		matrix[i] = make([]int, n)
 	}
-	matrix := make([][]int, n, n)
-	tmp := []int{}
-	for i := 0; i < n; i++ {
-		tmp = append(tmp, 0)
-	}
-	for i := 0; i < n; i++ {
-		matrix = append(matrix, matrix...)
-	}
-	fmt.Println(matrix)
-	col := n
-	row := 0
-	for col > 0 {
-		n = nums[0]
-		if len(nums) == 0 {
-			break
+
+	row, col, dirIdx := 0, 0, 0
+	for i:= 1; i <= n*n; i++ {
+		matrix[row][col] = i
+		dir := dirs[dirIdx]
+		if r, c := row + dir.x, col + dir.y; r < 0 || r >= n || c < 0 || c >= n || matrix[r][c] > 0 {
+			dirIdx = (dirIdx + 1) % 4 // 顺时针旋转至下一个方向
+			dir = dirs[dirIdx]
 		}
-		nums = nums[1:]
-		for c := 0; c < col; c++ {
-			matrix[row][c] = n
-			col = c
-		}
-		for r := 0; r < row; r++ {
-			matrix[r][col] = n
-			row = r
-		}
+		row += dir.x
+		col += dir.y
 	}
 	return matrix
 }
