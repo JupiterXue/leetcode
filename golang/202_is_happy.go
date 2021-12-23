@@ -16,7 +16,7 @@ func checkExist(partNum []int, bigNums [][]int) bool {
 	return count >= 2
 }
 
-func sumNums(nums []int) int {
+func sumNums_(nums []int) int {
 	res := 0
 	for _, v := range nums {
 		res += v
@@ -34,7 +34,7 @@ func isHappy(n int) bool {
 			n /= 10
 		}
 		bigNums = append(bigNums, nums)
-		sum := sumNums(nums)
+		sum := sumNums_(nums)
 		if sum == 1 {
 			break
 		} else if checkExist(nums, bigNums) { // 说明没有找到

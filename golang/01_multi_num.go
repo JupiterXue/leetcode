@@ -18,6 +18,9 @@ func twoSum(nums []int, target int) []int {
 		//}
 	}
 	return result
+	//s := "host,port,user"
+	//host,port,user := strings.Split(s, ",")
+	//fmt.Println(host)
 }
 
 func main() {
