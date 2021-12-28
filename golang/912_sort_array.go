@@ -109,31 +109,63 @@ import "fmt"
 //}
 
 // 4. 快排，AC！
+//func sortArray(nums []int) []int {
+//	quickSort(nums, 0, len(nums)-1)
+//	return nums
+//}
+//
+//func quickSort(nums []int, left int, right int) {
+//	if left < right {
+//		pivot := partition(nums, left, right)
+//		quickSort(nums, left, pivot - 1)
+//		quickSort(nums, pivot + 1, right)
+//	}
+//}
+//
+//func partition(nums []int, left int, right int) int {
+//	pivot := left
+//	index := pivot + 1
+//	for i := index; i <= right; i++ {
+//		if nums[i] < nums[pivot] {
+//			nums[i], nums[index] = nums[index], nums[i]
+//			index++
+//		}
+//	}
+//	nums[pivot], nums[index-1] = nums[index-1], nums[pivot]
+//	return index - 1
+//}
+
 func sortArray(nums []int) []int {
-	quickSort(nums, 0, len(nums)-1)
+	qs(nums, 0, len(nums)-1)
 	return nums
 }
 
-func quickSort(nums []int, left int, right int) {
-	if left < right {
-		pivot := partition(nums, left, right)
-		quickSort(nums, left, pivot - 1)
-		quickSort(nums, pivot + 1, right)
+func qs(nums []int, low int, high int) {
+	if low < high {
+		pivotIdx := partition(nums, low, high)
+		qs(nums, low, pivotIdx-1)
+		qs(nums, pivotIdx+1, high)
 	}
 }
 
-func partition(nums []int, left int, right int) int {
-	pivot := left
-	index := pivot + 1
-	for i := index; i <= right; i++ {
-		if nums[i] < nums[pivot] {
-			nums[i], nums[index] = nums[index], nums[i]
-			index++
+func partition(nums []int, low int, high int) int {
+	pivot := nums[low]
+	for low < high {
+		for low < high && pivot <= nums[high] {
+			high--
 		}
+		nums[low] = nums[high]
+		for low < high && pivot >= nums[high] {
+			low++
+		}
+		nums[high] = nums[low]
 	}
-	nums[pivot], nums[index-1] = nums[index-1], nums[pivot]
-	return index - 1
+	nums[low] = pivot
+	return low
 }
+
+
+
 
 //func partition(arr []int,left, right int) int {
 //	pivot := left
@@ -149,6 +181,6 @@ func partition(nums []int, left int, right int) int {
 //}
 
 func main() {
-	nums := []int{5,2,3,1}
+	nums := []int{5, 2, 3, 1}
 	fmt.Println(sortArray(nums))
 }
