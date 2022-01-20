@@ -20,27 +20,46 @@ import "fmt"
 //	return -1
 //}
 
+//func search2(nums []int, target int) int {
+//	low := 0
+//	high := len(nums) - 1
+//	for low <= high {
+//		i := (low+high) / 2
+//		mid := nums[i]
+//		if mid == target {
+//			return i
+//		} else if mid > target {
+//			high = i - 1
+//		} else {
+//			low = i + 1
+//		}
+//	}
+//	return -1
+//}
+
 func search2(nums []int, target int) int {
-	low := 0
-	high := len(nums) - 1
+	low, high := 0, len(nums)-1
 	for low <= high {
-		i := (low+high) / 2
-		mid := nums[i]
+		midIdx := (low+high)/2
+		mid := nums[midIdx]
 		if mid == target {
-			return i
-		} else if mid > target {
-			high = i - 1
+			return midIdx
+		} else if mid < target {
+			low = midIdx + 1
 		} else {
-			low = i + 1
+			high = midIdx - 1
 		}
 	}
 	return -1
 }
 
 
+
+
 func main() {
 	nums := []int{-1,0,3,5,9,12}
 	//target := 2
-	target := 2
+	//target := 2
+	target := 3
 	fmt.Println(search2(nums, target))
 }

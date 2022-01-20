@@ -17,15 +17,32 @@ import (
 //	return len(nums)
 //}
 
+
+// 1. 暴力法， AC
+//func removeElement(nums []int, val int) int {
+//	for i := 0; i < len(nums); i++ {
+//		if nums[i] == val {
+//			nums = append(nums[:i], nums[i+1:]...)
+//			i--
+//		}
+//	}
+//	return len(nums)
+//}
+
+// 2. 双指针法
 func removeElement(nums []int, val int) int {
-	for i := 0; i < len(nums); i++ {
-		if nums[i] == val {
-			nums = append(nums[:i], nums[i+1:]...)
-			i--
+	// left 作为剩余元素计数器
+	left := 0
+	length := len(nums)
+	for right := 0; right < length; right++ {
+		if nums[right] != val {
+			nums[left] = nums[right]
+			left++
 		}
 	}
-	return len(nums)
+	return left
 }
+
 
 func main() {
 	//make构造一个切片
