@@ -63,17 +63,31 @@ import (
 //}
 
 // 4. 题解，动态规划，AC！
+//func maxSubArray(nums []int) int {
+//	max := nums[0]
+//	for i := 1; i < len(nums); i++ {
+//		if nums[i] + nums[i-1] > nums[i] {
+//			nums[i] += nums[i-1]
+//		}
+//		if nums[i] > max {
+//			max = nums[i]
+//		}
+//	}
+//	return max
+//}
+
+// 5. 自己写，贪婪，AC
 func maxSubArray(nums []int) int {
-	max := nums[0]
+	sum := nums[0]
 	for i := 1; i < len(nums); i++ {
 		if nums[i] + nums[i-1] > nums[i] {
 			nums[i] += nums[i-1]
 		}
-		if nums[i] > max {
-			max = nums[i]
+		if nums[i] > sum {
+			sum = nums[i]
 		}
 	}
-	return max
+	return sum
 }
 
 func main() {

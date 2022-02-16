@@ -2,17 +2,7 @@ package main
 
 import "fmt"
 
-func maxProfit2(prices []int) int {
-	res := 0
-	for i := 1; i < len(prices); i++ {
-		if prices[i] > prices[i-1] {
-			res += prices[i] - prices[i-1]
-		}
-	}
-	return res
-}
-
-// AC!!!
+// 1. 自己写，AC!!!
 //func maxProfit2(prices []int) int {
 //	allProfit := 0
 //	maxProfit := 0
@@ -51,6 +41,28 @@ func maxProfit2(prices []int) int {
 //	}
 //	return allProfit+maxProfit
 //}
+
+// 2. 题解，AC！
+//func maxProfit2(prices []int) int {
+//	res := 0
+//	for i := 1; i < len(prices); i++ {
+//		if prices[i] > prices[i-1] {
+//			res += prices[i] - prices[i-1]
+//		}
+//	}
+//	return res
+//}
+
+// 3. 贪婪，AC！
+func maxProfit2(prices []int) int {
+	res := 0
+	for i := 1; i < len(prices); i++ {
+		if prices[i] > prices[i-1] {
+			res += prices[i] - prices[i-1]
+		}
+	}
+	return res
+}
 
 func main() {
 	//prices := []int{7,1,5,3,6,4}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
 // 1. 自己写，排序，AC！
@@ -23,59 +24,59 @@ import (
 //}
 
 // 2. 自己写，贪婪，AC！
-func findContentChildren(g []int, s []int) int {
-	count := 0
-	if len(s) == 0 {
-		return count
-	}
-	for g[getNumsMinIdx(g)] <= s[getNumsMaxIdx(s, 0)] {
-		sIdx := getNumsMaxIdx(s, 0)
-		sVal := s[sIdx]
-		gIdx := getNumsMaxIdx(g, sVal)
-		gVal := g[gIdx]
-		//fmt.Println(sVal)
-		//fmt.Println(gVal)
-		if sVal >= gVal {
-			count++
-		}
-		s = append(s[:sIdx], s[sIdx+1:]...)
-		g = append(g[:gIdx], g[gIdx+1:]...)
-		if len(s) == 0 || len(g) == 0 {
-			return count
-		}
-	}
-	fmt.Println(g)
-	fmt.Println(s)
-	return count
-}
-
-func getNumsMaxIdx(nums []int, target int) int {
-	max := 0
-	idx := 0
-	for i, v := range nums {
-		if max <= v {
-			if target > 0 && v > target {
-				continue
-			} else {
-				max = v
-				idx = i
-			}
-		}
-	}
-	return idx
-}
-
-func getNumsMinIdx(nums []int) int {
-	min := 100000000
-	idx := 0
-	for i, v := range nums {
-		if min >= v {
-			min = v
-			idx = i
-		}
-	}
-	return idx
-}
+//func findContentChildren(g []int, s []int) int {
+//	count := 0
+//	if len(s) == 0 {
+//		return count
+//	}
+//	for g[getNumsMinIdx(g)] <= s[getNumsMaxIdx(s, 0)] {
+//		sIdx := getNumsMaxIdx(s, 0)
+//		sVal := s[sIdx]
+//		gIdx := getNumsMaxIdx(g, sVal)
+//		gVal := g[gIdx]
+//		//fmt.Println(sVal)
+//		//fmt.Println(gVal)
+//		if sVal >= gVal {
+//			count++
+//		}
+//		s = append(s[:sIdx], s[sIdx+1:]...)
+//		g = append(g[:gIdx], g[gIdx+1:]...)
+//		if len(s) == 0 || len(g) == 0 {
+//			return count
+//		}
+//	}
+//	fmt.Println(g)
+//	fmt.Println(s)
+//	return count
+//}
+//
+//func getNumsMaxIdx(nums []int, target int) int {
+//	max := 0
+//	idx := 0
+//	for i, v := range nums {
+//		if max <= v {
+//			if target > 0 && v > target {
+//				continue
+//			} else {
+//				max = v
+//				idx = i
+//			}
+//		}
+//	}
+//	return idx
+//}
+//
+//func getNumsMinIdx(nums []int) int {
+//	min := 100000000
+//	idx := 0
+//	for i, v := range nums {
+//		if min >= v {
+//			min = v
+//			idx = i
+//		}
+//	}
+//	return idx
+//}
 
 // 3. 题解，贪婪，AC
 //func findContentChildren(g []int, s []int) int {
@@ -94,6 +95,20 @@ func getNumsMinIdx(nums []int) int {
 //	}
 //	return res
 //}
+
+
+// 4. 手写，贪婪，AC！
+func findContentChildren(g []int, s []int) int {
+	sort.Ints(g)
+	sort.Ints(s)
+	child := 0
+	for i := 0; child < len(g) && i < len(s); i++ {
+		if s[i] >= g[child] {
+			child++
+		}
+	}
+	return child
+}
 
 func main() {
 	//g := []int{1,2,3}
