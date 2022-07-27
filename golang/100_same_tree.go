@@ -33,12 +33,6 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
 //	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
 //}
 
-type TreeNode struct {
-	Val int
-	Left *TreeNode
-	Right *TreeNode
-}
-
 func (t *TreeNode) CreateTree(s string)  {
 	for i := 0; i < len(s) - 2; i += 3 {
 		t.Val, _ = strconv.Atoi(string(s[i]))
